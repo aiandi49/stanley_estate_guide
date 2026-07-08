@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding Out About Uncle Stanley</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --paper: #F6EFE2;
+    --paper-2: #EFE4CF;
+    --paper-card: #FFFFFF;
+    --ink: #241C15;
+    --ink-soft: #6B5F4E;
+    --rule: #E3D5B8;
+    --seal: #A1372E;
+    --seal-2: #6E1F1F;
+    --seal-soft: #F7E3DE;
+    --brass: #A67C2E;
+    --brass-2: #E4B65C;
+    --brass-soft: #FAF0D9;
+    --pine: #2E5240;
+    --pine-2: #467A5D;
+    --pine-soft: #E4EEE6;
+    --slate: #3E4C63;
+    --slate-2: #6C82A6;
+    --slate-soft: #E7EBF2;
+    --shadow: 0 1px 2px rgba(36,28,21,0.08), 0 10px 28px rgba(36,28,21,0.10);
+    --shadow-lg: 0 6px 14px rgba(36,28,21,0.10), 0 30px 60px -10px rgba(36,28,21,0.28);
+    --hero-grad: radial-gradient(120% 140% at 12% -10%, #7A93B8 0%, transparent 45%),
+                 radial-gradient(100% 120% at 100% 0%, #4A5E80 0%, transparent 55%),
+                 linear-gradient(160deg, #263349 0%, #1B2436 55%, #10141F 100%);
+    --hero-ink: #F3EFE4;
+    --hero-ink-soft: #C9D2E0;
+  }
+
+  [data-theme="dark"]{
+    --paper: #131311;
+    --paper-2: #1A1917;
+    --paper-card: #1E1D19;
+    --ink: #F1ECE0;
+    --ink-soft: #B3AB9C;
+    --rule: #37342C;
+    --seal: #E08A7C;
+    --seal-2: #F0AD9F;
+    --seal-soft: #2E1B18;
+    --brass: #E4B65C;
+    --brass-2: #F3D28C;
+    --brass-soft: #2C2213;
+    --pine: #7FB897;
+    --pine-2: #A6D4B6;
+    --pine-soft: #16241C;
+    --slate: #8FA6CC;
+    --slate-2: #B7C6E2;
+    --slate-soft: #171C29;
+    --shadow: 0 1px 2px rgba(0,0,0,0.5), 0 10px 28px rgba(0,0,0,0.5);
+    --shadow-lg: 0 6px 14px rgba(0,0,0,0.5), 0 30px 70px -10px rgba(0,0,0,0.7);
+    --hero-grad: radial-gradient(120% 140% at 12% -10%, #2A3550 0%, transparent 45%),
+                 radial-gradient(100% 120% at 100% 0%, #1E2740 0%, transparent 55%),
+                 linear-gradient(160deg, #0E1420 0%, #0B0F19 55%, #07090F 100%);
+    --hero-ink: #F1ECE0;
+    --hero-ink-soft: #B9C2D6;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; background:var(--paper);}
+  body{
+    margin:0;
+    background:radial-gradient(1200px 500px at 50% -6%, var(--paper-2), transparent 60%), var(--paper);
+    color:var(--ink); font-family:'Source Serif 4', Georgia, serif; line-height:1.65;
+    -webkit-font-smoothing:antialiased; transition:background .35s ease, color .35s ease;
+  }
+
+  .topbar{display:flex; align-items:center; justify-content:space-between; padding:18px 22px; max-width:860px; margin:0 auto;}
+  .brandmark{font-family:'Inter',sans-serif; font-weight:800; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); display:flex; align-items:center; gap:8px;}
+  .brandmark .dot{width:6px; height:6px; border-radius:50%; background:var(--slate);}
+  .theme-toggle{border:1px solid var(--rule); background:var(--paper-card); border-radius:99px; padding:8px 16px; font-family:'Inter',sans-serif; font-size:12px; font-weight:700; letter-spacing:.05em; color:var(--ink); cursor:pointer; box-shadow:var(--shadow);}
+
+  .hero-band{background:var(--hero-grad); position:relative; overflow:hidden; border-radius:0 0 34px 34px; box-shadow:var(--shadow-lg);}
+  .hero-band::after{content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 34px); pointer-events:none;}
+  .hero-inner{max-width:860px; margin:0 auto; padding:18px 26px 46px; position:relative; z-index:1;}
+  .eyebrow{display:inline-flex; align-items:center; gap:10px; font-family:'Inter',sans-serif; font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--slate-2); margin-bottom:22px;}
+  .eyebrow::before{content:''; width:26px; height:2px; background:var(--slate-2); border-radius:2px;}
+  h1{font-family:'Fraunces', serif; font-weight:700; font-size:clamp(34px,6.6vw,52px); line-height:1.05; margin:0 0 20px; letter-spacing:-0.015em; color:var(--hero-ink); text-wrap:balance;}
+  .dek{font-size:19px; color:var(--hero-ink-soft); max-width:60ch; margin:0 0 30px;}
+  .case-strip{display:flex; flex-wrap:wrap; gap:12px;}
+  .case-chip{background:rgba(243,239,228,0.08); border:1px solid rgba(243,239,228,0.2); border-radius:12px; padding:11px 16px; font-family:'Inter',sans-serif; font-size:12.5px; color:var(--hero-ink);}
+  .case-chip b{display:block; font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--slate-2); font-weight:700; margin-bottom:4px;}
+
+  section.card{max-width:860px; margin:34px auto 0; padding:0 22px;}
+  .card-inner{position:relative; background:var(--paper-card); border-radius:20px; padding:40px 40px 42px; box-shadow:var(--shadow-lg); border:1px solid var(--rule); overflow:hidden;}
+  .card-inner::before{content:''; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--accent-grad, linear-gradient(180deg, var(--slate), var(--slate-2)));}
+  .card-inner.pine::before{ --accent-grad: linear-gradient(180deg, var(--pine), var(--pine-2)); }
+  .card-inner.brass::before{ --accent-grad: linear-gradient(180deg, var(--brass), var(--brass-2)); }
+  .card-inner.seal::before{ --accent-grad: linear-gradient(180deg, var(--seal-2), var(--seal)); }
+  .card-inner.slate::before{ --accent-grad: linear-gradient(180deg, var(--slate), var(--slate-2)); }
+  .card-glow{position:absolute; width:280px; height:280px; border-radius:50%; filter:blur(60px); opacity:.14; pointer-events:none; z-index:0; top:-90px; right:-90px;}
+  .card-inner.seal .card-glow{background:var(--seal);}
+  .card-inner.pine .card-glow{background:var(--pine);}
+  .card-inner.brass .card-glow{background:var(--brass);}
+  .card-inner.slate .card-glow{background:var(--slate);}
+  .card-content{position:relative; z-index:1;}
+
+  .sec-label{font-family:'Inter',sans-serif; font-size:12px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; margin-bottom:12px; background:var(--accent-grad, linear-gradient(90deg, var(--slate), var(--slate-2))); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .card-inner.pine .sec-label{ --accent-grad: linear-gradient(90deg, var(--pine), var(--pine-2)); }
+  .card-inner.brass .sec-label{ --accent-grad: linear-gradient(90deg, var(--brass), var(--brass-2)); }
+  .card-inner.seal .sec-label{ --accent-grad: linear-gradient(90deg, var(--seal-2), var(--seal)); }
+  .card-inner.slate .sec-label{ --accent-grad: linear-gradient(90deg, var(--slate), var(--slate-2)); }
+
+  h2{font-family:'Fraunces', serif; font-weight:700; font-size:28px; margin:0 0 18px; letter-spacing:-0.01em;}
+  h3{font-family:'Fraunces', serif; font-weight:600; font-size:18.5px; margin:26px 0 10px;}
+  p{margin:0 0 16px; font-size:16.5px;}
+  p.muted{color:var(--ink-soft); font-size:15px;}
+  ul, ol{margin:0 0 16px; padding-left:22px;}
+  li{margin-bottom:9px; font-size:16.5px;}
+  strong{font-weight:600;}
+
+  .callout{background:linear-gradient(135deg, var(--seal-soft), transparent 120%); border-left:3px solid var(--seal); border-radius:0 12px 12px 0; padding:18px 22px; margin:22px 0; font-size:15.5px;}
+  .callout.pine{background:linear-gradient(135deg, var(--pine-soft), transparent 120%); border-left-color:var(--pine);}
+  .callout.slate{background:linear-gradient(135deg, var(--slate-soft), transparent 120%); border-left-color:var(--slate);}
+  .callout b{color:var(--seal); font-family:'Inter',sans-serif; font-size:11.5px; text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:6px;}
+  .callout.pine b{color:var(--pine);}
+  .callout.slate b{color:var(--slate);}
+
+  .fam-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0 6px;}
+  @media (max-width:560px){.fam-grid{grid-template-columns:1fr;}}
+  .fam-card{border:1px solid var(--rule); border-radius:14px; padding:16px 18px; background:linear-gradient(160deg, var(--paper-2), var(--paper-card));}
+  .fam-role{font-family:'Inter',sans-serif; font-size:10.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--slate); margin-bottom:5px;}
+  .fam-name{font-family:'Fraunces',serif; font-size:17px; font-weight:600; margin-bottom:4px;}
+  .fam-desc{font-size:13.5px; color:var(--ink-soft);}
+
+  .checklist{list-style:none; padding:0; margin:18px 0;}
+  .checklist li{display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border:1px solid var(--rule); border-radius:12px; margin-bottom:10px; background:linear-gradient(160deg, var(--paper-2), var(--paper-card));}
+  .checklist input[type="checkbox"]{appearance:none; -webkit-appearance:none; width:20px; height:20px; min-width:20px; border:2px solid var(--slate-2); border-radius:6px; margin-top:2px; cursor:pointer; background:var(--paper-card);}
+  .checklist input[type="checkbox"]:checked{background:linear-gradient(135deg, var(--slate), var(--slate-2)); border-color:var(--slate);}
+  .checklist input[type="checkbox"]:checked::after{content:'✓'; color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .checklist label{font-size:15.5px; line-height:1.5; cursor:pointer;}
+  .checklist label b{display:block; font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--slate); margin-bottom:2px;}
+
+  .timer-strip{display:flex; gap:16px; flex-wrap:wrap; margin:18px 0;}
+  .timer-card{flex:1; min-width:180px; border:1px solid var(--rule); border-radius:14px; padding:18px; background:linear-gradient(160deg, var(--paper-2), var(--paper-card)); text-align:center;}
+  .timer-card .t-num{font-family:'Fraunces',serif; font-weight:800; font-size:26px; color:var(--seal);}
+  .timer-card .t-lbl{font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); margin-top:4px;}
+
+  .resource{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:15px 0; border-bottom:1px solid var(--rule);}
+  .resource:last-child{border-bottom:none;}
+  .resource-name{font-family:'Fraunces',serif; font-weight:600; font-size:16.5px;}
+  .resource-detail{font-size:13.5px; color:var(--ink-soft); font-family:'Inter',sans-serif; text-align:right;}
+
+  .fill-box{border:1.5px dashed var(--rule); border-radius:12px; padding:14px 16px; margin:10px 0; font-family:'Inter',sans-serif; font-size:13.5px; color:var(--ink-soft); background:var(--paper-2);}
+  .fill-box b{color:var(--ink); font-weight:700;}
+
+  footer{max-width:860px; margin:34px auto 0; padding:0 22px 70px;}
+  .disclaimer-card{background:linear-gradient(160deg, var(--paper-2), var(--paper)); border:1px dashed var(--rule); border-radius:16px; padding:22px 26px;}
+  .disclaimer-card b{display:block; font-family:'Fraunces',serif; font-size:15px; margin-bottom:8px;}
+  .disclaimer{font-family:'Inter',sans-serif; font-size:12.5px; color:var(--ink-soft); line-height:1.75;}
+
+  @media (max-width:600px){
+    .card-inner{padding:30px 24px 32px;}
+    .hero-inner{padding:14px 20px 36px;}
+  }
+</style>
+</head>
+<body data-theme="light">
+
+<div class="hero-band">
+  <div class="topbar" style="position:relative; z-index:2;">
+    <div class="brandmark" style="color:var(--hero-ink-soft);"><span class="dot" style="background:var(--slate-2);"></span>Getting Started · In memory of Stanley Moore</div>
+    <button class="theme-toggle" onclick="toggleTheme()" style="background:rgba(243,239,228,0.1); border-color:rgba(243,239,228,0.28); color:var(--hero-ink);">☾ Toggle theme</button>
+  </div>
+  <div class="hero-inner">
+    <div class="eyebrow">A starting-point guide for Gloria</div>
+    <h1>Finding Out About<br>Uncle Stanley</h1>
+    <p class="dek">Almost nothing about Stanley's estate has been confirmed yet — no known will, no confirmed probate filing. This is a guide to get from "we don't know" to real answers: about his estate, and separately, about what happened the night of the explosion.</p>
+    <div class="case-strip">
+      <div class="case-chip"><b>Location</b>Banbury Lane, Bloomfield</div>
+      <div class="case-chip"><b>Incident date</b>March 9, 2026</div>
+      <div class="case-chip"><b>Marital status</b>Not married</div>
+      <div class="case-chip"><b>Known will</b>None confirmed yet</div>
+    </div>
+  </div>
+</div>
+
+<section class="card">
+  <div class="card-inner slate">
+    <div class="card-glow"></div>
+    <div class="card-content">
+      <div class="sec-label">Where things stand today</div>
+      <h2>What's confirmed, and what isn't</h2>
+      <p>Stanley lived at <strong>27 Banbury Lane, Bloomfield</strong>. On the evening of <strong>March 9, 2026</strong>, firefighters responded to a report of an explosion at his home, arriving to find the residence engulfed in flames. Bloomfield's fire marshal later confirmed an explosion had occurred on the property. He was not married. He has an adopted daughter, Destiny, who is legally his child. His siblings are Gloria (his half-sister — they share a mother but not a father), Deborah, and Junior.</p>
+      <div class="fill-box"><b>What was publicly reported that night</b> — NBC Connecticut reported that one person was initially unaccounted for after the fire, and that authorities said they were in contact with the man believed to have been inside the home. The outlet noted there was no indication of a criminal element to the fire at that time. The article does not confirm cause of death, so it's worth requesting the official fire marshal and medical examiner records directly rather than relying on the news account alone. <a href="https://www.nbcconnecticut.com/news/local/firefighters-respond-to-house-explosion-in-bloomfield/3712142/" target="_blank" rel="noopener" style="color:var(--slate);">Source: NBC Connecticut, March 9, 2026 →</a></div>
+      <div class="fill-box"><b>Corroborated by other outlets</b> — WFSB (Channel 3) and WTNH (News 8) also covered the fire independently. WFSB's follow-up headline the next morning read "Body recovered after home explosion," attributing confirmation to the Bloomfield fire marshal — consistent with what the family already understood, from a second, independent source. Neighbors described hearing a loud boom and seeing smoke before firefighters arrived.</div>
+      <p>Nobody in the family has confirmed yet whether Stanley left a will, or whether an estate has already been opened with a probate court. Those two facts are the actual starting point for everything else — the next section is how to find them out.</p>
+      <div class="fam-grid">
+        <div class="fam-card">
+          <div class="fam-role">Legal child</div>
+          <div class="fam-name">Destiny</div>
+          <div class="fam-desc">Adopted daughter. Under Connecticut law, an adopted child inherits exactly as a biological child would.</div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-role">Sibling</div>
+          <div class="fam-name">Gloria Myers</div>
+          <div class="fam-desc">Half-sister to Stanley (same mother, different father).</div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-role">Sibling</div>
+          <div class="fam-name">Deborah</div>
+          <div class="fam-desc">Full sibling relationship as referenced in family discussion.</div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-role">Sibling</div>
+          <div class="fam-name">Junior (Andrew)</div>
+          <div class="fam-desc">Currently the subject of a separate conservatorship matter — see his hearing-prep guide.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-inner brass">
+    <div class="card-glow"></div>
+    <div class="card-content">
+      <div class="sec-label">Step one</div>
+      <h2>Find out if an estate has already been opened</h2>
+      <p>Connecticut estates are handled by the probate court for the town where the person lived — not necessarily where they died. Bloomfield falls under the <strong>Tobacco Valley Probate Court (District 3)</strong>, based in Windsor Locks.</p>
+      <ol>
+        <li><strong>Call the court directly</strong> and ask whether a file has been opened for Stanley's estate. This is public information — anyone can ask.</li>
+        <li><strong>If a file exists</strong>, ask who was appointed executor or administrator, and whether a will was submitted. Estate records, including a filed will, can be requested for a small copy fee.</li>
+        <li><strong>If no file exists yet</strong>, ask what's required to open one — usually a certified death certificate and an application, which any next of kin (including a sibling) can typically initiate if no one else has.</li>
+      </ol>
+      <div class="fill-box"><b>Tobacco Valley Probate Court</b> — Windsor Locks Town Hall, 50 Church Street, Windsor Locks, CT 06096 · (860) 627-1450</div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-inner">
+    <div class="card-glow"></div>
+    <div class="card-content">
+      <div class="sec-label">General Connecticut law, not case-specific advice</div>
+      <h2>If there's no will: what happens next</h2>
+      <p>This is worth understanding clearly, even though it may not be the answer the family wants to hear. Connecticut's intestacy law (the rules that apply when someone dies without a valid will) follows a strict order of priority:</p>
+      <ol>
+        <li><strong>Surviving spouse and children first.</strong> Stanley was not married, but he has a legal daughter, Destiny — and adopted children inherit exactly as biological children do under Connecticut law.</li>
+        <li><strong>Parents, only if there is no surviving spouse or child.</strong></li>
+        <li><strong>Siblings, only if there is no surviving spouse, child, or parent.</strong></li>
+      </ol>
+      <div class="callout">
+        <b>What this likely means here</b>
+        Because Stanley has a surviving legal child, Connecticut intestacy law would generally direct his estate to Destiny if no will exists — not to his siblings. This isn't a final answer (a will, if one turns up, could say something different), but it's the realistic starting expectation.
+      </div>
+      <p>That said, being a sibling doesn't mean Gloria has no standing at all. Next of kin are generally entitled to notice that an estate has been opened, and can raise questions with the court about how it's being handled — even without a right to inherit.</p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-inner seal">
+    <div class="card-glow"></div>
+    <div class="card-content">
+      <div class="sec-label">A separate legal track</div>
+      <h2>The explosion investigation</h2>
+      <p>This runs on its own timeline, completely separate from the estate. Two agencies appear to be involved, and that's normal for a fire this serious rather than a conflict: the <strong>Bloomfield fire marshal</strong> confirmed the explosion locally and has been the public-facing source in news coverage, while the actual origin-and-cause investigation is being handled by the <strong>Connecticut State Police Fire and Explosion Investigation Unit</strong> — a state-level unit that assists with exactly this kind of incident.</p>
+      <div class="fam-grid" style="margin-top:6px;">
+        <div class="fam-card">
+          <div class="fam-role">Lead investigator</div>
+          <div class="fam-name">Det. Nicholas Baldwin</div>
+          <div class="fam-desc">Badge #651 · CT State Police Fire &amp; Explosion Investigation Unit<br>Cell: (860) 989-8186<br>Email: Nicholas.Baldwin@ct.gov</div>
+        </div>
+        <div class="fam-card">
+          <div class="fam-role">Company of interest</div>
+          <div class="fam-name">Whiting Oil</div>
+          <div class="fam-desc">Performed work at the Banbury Lane property before the explosion. Possible negligence has not been confirmed — this is what the investigation is examining.</div>
+        </div>
+      </div>
+      <div class="callout slate">
+        <b>Worth doing now that the contact is confirmed</b>
+        With Detective Baldwin's direct line and email in hand, a short follow-up call or email asking for a case status update is reasonable — investigators expect this from next of kin. It's also worth asking him directly whether Whiting Oil has been formally named, or whether that's still preliminary, before repeating it as fact to anyone else (an insurer, an attorney, etc.).
+      </div>
+      <h3>If negligence is confirmed</h3>
+      <p>A wrongful death claim in Connecticut can only be filed by the <strong>executor or administrator of Stanley's estate</strong> — not by an individual sibling — which is another reason getting the probate estate opened (Step One, above) matters even if no one expects to inherit from it directly.</p>
+      <div class="timer-strip">
+        <div class="timer-card"><div class="t-num">2 yrs</div><div class="t-lbl">from date of death<br>to file a claim</div></div>
+        <div class="timer-card"><div class="t-num">5 yrs</div><div class="t-lbl">absolute outer limit<br>from the incident itself</div></div>
+      </div>
+      <p class="muted">Based on the March 9, 2026 incident, the standard filing deadline would fall around <strong>March 9, 2028</strong>, with an absolute outer limit around <strong>March 9, 2031</strong>. That's more time than it feels like right now, but evidence and witness memory fade — an attorney sooner rather than later gives the strongest case.</p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-inner pine">
+    <div class="card-glow"></div>
+    <div class="card-content">
+      <div class="sec-label">This week</div>
+      <h2>Gloria's next steps</h2>
+      <ul class="checklist">
+        <li><input type="checkbox" id="s1"><label for="s1"><b>Call Tobacco Valley Probate Court</b>Ask whether an estate has been opened for Stanley, and if so, whether a will was filed.</label></li>
+        <li><input type="checkbox" id="s2"><label for="s2"><b>Request the death certificate</b>Certified copies are usually available through the town clerk in Bloomfield or the CT Department of Public Health — needed for nearly every next step.</label></li>
+        <li><input type="checkbox" id="s3"><label for="s3"><b>Follow up with Detective Baldwin</b>(860) 989-8186 or Nicholas.Baldwin@ct.gov — ask for a case status update, and whether Whiting Oil has been formally named or is still preliminary.</label></li>
+        <li><input type="checkbox" id="s4"><label for="s4"><b>Gather any paperwork tied to Whiting Oil</b>Contracts, invoices, service records, or correspondence showing what work they did at 27 Banbury Lane and when — useful evidence regardless of who ends up handling a claim.</label></li>
+        <li><input type="checkbox" id="s5"><label for="s5"><b>Check with Destiny</b>As his legal daughter, she may already know whether Stanley had a will, an attorney, or existing paperwork — and she'd likely be the one the court looks to first.</label></li>
+        <li><input type="checkbox" id="s6"><label for="s6"><b>Consult a probate attorney about opening the estate</b>Especially if no one has yet — this also starts the clock on being able to pursue a wrongful death claim later, if warranted.</label></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-inner">
+    <div class="card-glow"></div>
+    <div class="card-content">
+      <div class="sec-label">Where to call</div>
+      <h2>Contacts to start with</h2>
+      <div class="resource">
+        <div class="resource-name">Tobacco Valley Probate Court (District 3)</div>
+        <div class="resource-detail">50 Church St, Windsor Locks, CT 06096<br>(860) 627-1450</div>
+      </div>
+      <div class="resource">
+        <div class="resource-name">Bloomfield Town Clerk</div>
+        <div class="resource-detail">Death certificates &amp; local vital records</div>
+      </div>
+      <div class="resource">
+        <div class="resource-name">Det. Nicholas Baldwin</div>
+        <div class="resource-detail">CT State Police Fire &amp; Explosion Investigation Unit<br>Badge #651 · (860) 989-8186<br>Nicholas.Baldwin@ct.gov</div>
+      </div>
+      <div class="resource">
+        <div class="resource-name">Statewide Legal Services of Connecticut</div>
+        <div class="resource-detail">Free legal help for qualifying residents,<br>including probate matters</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaimer-card">
+    <b>This is a starting-point guide, not legal advice.</b>
+    <div class="disclaimer">Whether Stanley left a will and whether an estate has been opened are still unconfirmed — this guide is built to help Gloria go find those answers, not assume them. The investigator (Det. Nicholas Baldwin) and the company of interest (Whiting Oil) are now identified, but negligence itself has not been confirmed by any official source yet. Once more is confirmed (especially if a will turns up, or the investigation formally names a responsible party), a Connecticut probate attorney and a personal-injury attorney are the right people to turn the facts gathered here into an actual plan.</div>
+  </div>
+</footer>
+
+<script>
+function toggleTheme(){
+  const body = document.body;
+  const current = body.getAttribute('data-theme');
+  body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+}
+if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+  document.body.setAttribute('data-theme','dark');
+}
+</script>
+
+</body>
+</html>
